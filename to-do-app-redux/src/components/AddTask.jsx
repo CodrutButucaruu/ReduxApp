@@ -1,15 +1,15 @@
-import React, { useState } from "react";
-import { addNewTask } from "../store/tasks";
-import { useDispatch } from "react-redux";
+import React, {useState} from 'react';
+import {addNewTask} from '../store/tasks';
+import {useDispatch} from 'react-redux';
 
 const AddTask = () => {
-    const [task, setTask] = useState("");
+    const [task, setTask] = useState('');
     const dispatch = useDispatch();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(addNewTask({ task: task }));
-        setTask("");
+        dispatch(addNewTask({task: task}));
+        setTask('');
     };
     return (
         <form onSubmit={handleSubmit}>
@@ -18,6 +18,8 @@ const AddTask = () => {
                 name='task'
                 placeholder='Enter new task...'
                 value={task}
+                required
+                maxLength={30}
                 onChange={(e) => setTask(e.target.value)}
             />
 

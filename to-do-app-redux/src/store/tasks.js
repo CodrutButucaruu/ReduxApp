@@ -1,6 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {apiCallBegan} from './api';
-let id = 0;
 const initialState = {
     tasks: [],
     loading: false,
@@ -12,10 +11,10 @@ const taskSlice = createSlice({
     initialState,
     reducers: {
         // action: function
-        apiRequested: (state, action) => {
+        apiRequested: (state) => {
             state.loading = true;
         },
-        apiRequestFailed: (state, action) => {
+        apiRequestFailed: (state) => {
             state.loading = false;
         },
         getTasks: (state, action) => {
@@ -50,7 +49,6 @@ export const {
 } = taskSlice.actions;
 export default taskSlice.reducer;
 
-// Action Creators
 const url = '/tasks';
 
 export const loadTasks = () =>
@@ -71,7 +69,6 @@ export const addNewTask = (task) =>
 
 export const updateCompleted = (task) =>
     apiCallBegan({
-        // /tasks/6
         url: `${url}/${task.id}`,
         method: 'PATCH',
         data: task,
@@ -80,7 +77,6 @@ export const updateCompleted = (task) =>
 
 export const deleteTask = (task) =>
     apiCallBegan({
-        // /tasks/6
         url: `${url}/${task.id}`,
         method: 'DELETE',
         onSuccess: removeTask.type,
